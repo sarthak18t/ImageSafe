@@ -43,7 +43,7 @@ const Display = ({ contract, account }) => {
     }
   };
   return (
-    <div>
+    <div> 
       <div className="image-list">{data}</div>
       <input
         type="text"

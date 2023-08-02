@@ -24,6 +24,7 @@ function App() {
             setAccount(currAccount);
             window.ethereum.on("accountsChanged",(newAccounts)=>{
               setAccount(newAccounts[0]);
+              window.location.reload();
             })
 
             const provider = new ethers.BrowserProvider(window.ethereum);
@@ -48,19 +49,21 @@ function App() {
     loadBlockchainData();
   },[])
   return (
-    <div className="App">
-      {!modalOpen && (<button className='share' onClick={()=>{setModalOpen(true)}}>Share</button>)}
+    <>
+    {!modalOpen && (<button className='share' onClick={()=>{setModalOpen(true)}}>Share</button>)}
       {modalOpen && (<Modal setModalOpen={setModalOpen} contract={contract}/>)}
-      <h1 style={{color:"white"}}>Drive</h1>
+    <div className="App">
+      <h1 style={{color:"white" , fontFamily:"monospace" }}>ImageSafe</h1>
       <div class="bg"></div>
       <div class="bg bg2"></div>
       <div class="bg bg3"></div>
-      <p style={{color:"white"}}
-      >ACCOUNT : {account? account:"No account connected"}
+      <p style={{color:"white" , fontWeight:"900" , fontSize:"20px"}}
+      >ACCOUNT ADDRESS: {account? account:"No account connected"}
       </p>
       <FileUpload account={account} contract={contract} provider={provider}/>
       <Display account={account} contract={contract}/>
     </div>
+    </>
   );
 }
 
